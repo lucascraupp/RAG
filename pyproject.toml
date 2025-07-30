@@ -10,5 +10,6 @@ dependencies = [
     "llama-index>=0.12.52",
     "llama-index-vector-stores-chroma>=0.4.2",
     "python-dotenv>=1.1.1",
+    "qdrant-client>=1.15.0",
     "tiktoken>=0.9.0",
 ]
