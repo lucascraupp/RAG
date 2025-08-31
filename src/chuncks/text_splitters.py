@@ -1,7 +1,8 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Union
 
 import yaml
 from langchain_experimental.text_splitter import SemanticChunker
+from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import (
     CharacterTextSplitter,
     MarkdownHeaderTextSplitter,
@@ -23,7 +24,32 @@ def load_data(model: str) -> Dict[str, str]:
     return data[model]
 
 
-def character_text_splitter(text: str, params: Optional[Dict] = None) -> List[str]:
+def generate_embeddings(
+    filename: str, chunks: List[str], params: Dict, chunk_method: str
+) -> Dict:
+    embedding = OpenAIEmbeddings(model="text-embedding-ada-002")
+
+    data = []
+    for chunk in chunks:
+        data.append(
+            {
+                "filename": filename,
+                "chunk_content": chunk,
+                "strategy_params": params,
+                "chunk_method": chunk_method,
+                "chunk_size": len(chunk),
+                "chunk_embeddings": embedding.embed(chunk),
+            }
+        )
+    return data
+
+
+def character_text_splitter(
+    text: str,
+    filename: str,
+    params: Optional[Dict] = None,
+    embeddings: Optional[bool] = False,
+) -> Union[Dict, List[str]]:
     """Divide o texto em pedaços menores usando um separador de caracteres.
 
     Args:
@@ -33,16 +59,23 @@ def character_text_splitter(text: str, params: Optional[Dict] = None) -> List[st
             carrega os parâmetros do arquivo de configuração.
 
     Returns:
-        List[str]: Lista de pedaços de texto após a divisão.
+        Union[Dict[str, Union[List[str], Dict]], List[str]]: Um dicionário contendo os pedaços de texto e os parâmetros utilizados
     """
     data = params or load_data("character_text_splitter")
 
     splitter = CharacterTextSplitter(**data)
 
-    return splitter.split_text(text)
+    chunks = splitter.split_text(text)
+
+    if embeddings:
+        return generate_embeddings(filename, chunks, data, "character_text_splitter")
+    else:
+        return chunks
 
 
-def recursive_text_splitter(text: str, params: Optional[Dict] = None) -> List[str]:
+def recursive_text_splitter(
+    text: str, filename: str, params: Optional[Dict] = None
+) -> Dict:
     """Divide recursivamente o texto em pedaços menores usando múltiplos separadores.
 
     Esta função implementa uma divisão de texto em múltiplos passos, aplicando diferentes
@@ -56,7 +89,7 @@ def recursive_text_splitter(text: str, params: Optional[Dict] = None) -> List[st
             carrega os parâmetros do arquivo de configuração.
 
     Returns:
-        List[str]: Lista de pedaços de texto após a divisão recursiva.
+       Dict: Um dicionário contendo os pedaços de texto e os parâmetros utilizados.
     """
     data = params or load_data("recursive_text_splitter")
 
@@ -74,16 +107,16 @@ def recursive_text_splitter(text: str, params: Optional[Dict] = None) -> List[st
         }
 
         for chunk in chunks:
-            next_chunks.extend(character_text_splitter(chunk, split_params))
+            next_chunks.extend(character_text_splitter(chunk, split_params)["chunks"])
 
         chunks = next_chunks
 
-    return chunks
+    return generate_embeddings(filename, chunks, data, "recursive_text_splitter")
 
 
 def recursive_character_text_splitter(
-    text: str, params: Optional[Dict] = None
-) -> List[str]:
+    text: str, filename: str, params: Optional[Dict] = None
+) -> Dict:
     """Divide o texto em pedaços menores usando separadores de cabeçalho Markdown.
 
     Se o tamanho do chunk superar o limite especificado, ele será dividido ainda mais, usando os separadores definidos.
@@ -95,15 +128,8 @@ def recursive_character_text_splitter(
             carrega os parâmetros do arquivo de configuração.
 
     Returns:
-        List[str]: Lista de pedaços de texto após a divisão.
+        Dict: Um dicionário contendo os pedaços de texto e os parâmetros utilizados.
     """
-    data = params or load_data("recursive_character_text_splitter")
-
-    # Converter length_function de string para função real
-    if isinstance(data, dict) and "length_function" in data:
-        if data["length_function"] == "len":
-            data["length_function"] = len
-
     data = params or load_data("recursive_character_text_splitter")
 
     # Converter length_function de string para função real
@@ -113,40 +139,67 @@ def recursive_character_text_splitter(
 
     splitter = RecursiveCharacterTextSplitter(**data)
 
-    return splitter.split_text(text)
+    chunks = splitter.split_text(text)
+
+    return generate_embeddings(
+        filename, chunks, data, "recursive_character_text_splitter"
+    )
 
 
 def markdown_header_metadata_splitter(
-    text: str, params: Optional[Dict] = None
-) -> List[str]:
+    text: str, filename: str, params: Optional[Dict] = None
+) -> Dict:
     """Divide o texto em pedaços menores usando separadores de cabeçalho Markdown.
 
     Args:
         text (str): O texto a ser dividido em pedaços menores.
         params (Optional[Dict], optional): Dicionário com parâmetros para divisão
-            como 'chunk_size', 'chunk_overlap' e 'separators'. Se não fornecido,
+            como 'headers_to_split_on', 'return_each_line' e 'strip_headers'. Se não fornecido,
             carrega os parâmetros do arquivo de configuração.
 
     Returns:
-        List[str]: Lista de pedaços de texto após a divisão.
+        Dict: Um dicionário contendo os pedaços de texto e os parâmetros utilizados.
     """
     data = params or load_data("markdown_header_metadata_splitter")
 
     splitter = MarkdownHeaderTextSplitter(**data)
 
-    return splitter.split_text(text)
+    chunks = splitter.split_text(text)
+
+    return generate_embeddings(
+        filename, chunks, data, "markdown_header_metadata_splitter"
+    )
 
 
-def semantic_splitter(text: str, params: Optional[Dict] = None) -> List[str]:
-    """
-    Splits the input text into chunks based on semantic similarity.
+def semantic_splitter(text: str, filename: str, params: Optional[Dict] = None) -> Dict:
+    """Divide o texto em pedaços menores usando separadores semânticos.
 
     Args:
-        text (str): The input text to split.
-        params (Optional[Dict]): Optional parameters for splitting.
+        text (str): O texto a ser dividido em pedaços menores.
+        params (Optional[Dict], optional): Dicionário com parâmetros para divisão
+            como 'embeddings' e 'buffer_size'. Se não fornecido,
+            carrega os parâmetros do arquivo de configuração.
 
     Returns:
-        List[str]: A list of text chunks.
+        Dict[str, Union[List[str], Dict]]: Um dicionário contendo os pedaços de texto e os parâmetros utilizados.
     """
-    # Implementation goes here
-    pass
+    data = params or load_data("semantic_splitter")
+
+    embeddings = OpenAIEmbeddings(
+        model=data.get("embedding_model", "text-embedding-ada-002")
+    )
+
+    data_dict = {
+        "embeddings": embeddings,
+        "buffer_size": data.get("buffer_size", 1),
+        "breakpoint_threshold_type": data.get(
+            "breakpoint_threshold_type", "percentile"
+        ),
+        "breakpoint_threshold_amount": data.get("breakpoint_threshold_amount", 95),
+    }
+
+    splitter = SemanticChunker(**data_dict)
+
+    chunks = splitter.split_text(text)
+
+    return generate_embeddings(filename, chunks, data, "semantic_splitter")
