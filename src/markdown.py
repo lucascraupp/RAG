@@ -6,29 +6,29 @@ from supabase import create_client
 from config import Config, logger
 
 
-def save_document(file_name: str, content: str) -> None:
-    logger.info(f"Salvando documento {file_name} na base de dados")
+def save_document(filename: str, content: str) -> None:
+    logger.info(f"Salvando documento {filename} na base de dados")
     supabase = create_client(Config.SUPABASE_URL, Config.SUPABASE_KEY)
 
     response = (
         supabase.table("documents")
-        .select("file_name")
-        .eq("file_name", file_name)
+        .select("filename")
+        .eq("filename", filename)
         .execute()
     )
 
     if response.data:
-        logger.info(f"Documento {file_name} já existe na base de dados")
+        logger.info(f"Documento {filename} já existe na base de dados")
         return
 
     supabase.table("documents").insert(
-        {"file_name": file_name, "content": content, "file_size": len(content)}
+        {"filename": filename, "content": content, "file_size": len(content)}
     ).execute()
 
-    logger.info(f"Documento {file_name} salvo com sucesso")
+    logger.info(f"Documento {filename} salvo com sucesso")
 
 
-def extract_markdown(file_name: str) -> None:
+def extract_markdown(filename: str) -> None:
     pipeline_options = PdfPipelineOptions(do_table_structure=True, do_ocr=False)
     pipeline_options.table_structure_options.mode = TableFormerMode.ACCURATE
 
@@ -38,9 +38,9 @@ def extract_markdown(file_name: str) -> None:
         }
     )
 
-    logger.info(f"Convertendo documento {file_name}")
-    result = converter.convert(f"docs/{file_name}.pdf")
+    logger.info(f"Convertendo documento {filename}")
+    result = converter.convert(f"docs/{filename}.pdf")
 
     markdown_content = result.document.export_to_markdown()
 
-    save_document(file_name, markdown_content)
+    save_document(filename, markdown_content)
