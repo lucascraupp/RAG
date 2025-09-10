@@ -1,16 +1,16 @@
 character_text_splitter:
-  chunk_size: 1000
+  chunk_size: 5000
   chunk_overlap: 200
   separator: "\n\n"
   keep_separator: False
 
 recursive_text_splitter:
-  chunk_size: 500
+  chunk_size: 1000
   chunk_overlap: 100
   separators: ["\n\n", "\n", " ", ""]
 
 recursive_character_text_splitter:
-  chunk_size: 200
+  chunk_size: 1000
   chunk_overlap: 100
   separators: ["\n\n", "\n", " ", ""]
   length_function: "len"
@@ -26,7 +26,7 @@ markdown_header_metadata_splitter:
   strip_headers: True
 
 semantic_splitter:
-  embeddings_model: "text-embedding-ada-002"
+  embeddings_model: "text-embedding-3-small"
   buffer_size: 1
   breakpoint_threshold_type: "percentile"
   breakpoint_threshold_amount: 95
