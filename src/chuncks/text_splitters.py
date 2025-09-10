@@ -1,3 +1,4 @@
+import logging
 from typing import Dict, List, Optional, Union
 
 import yaml
@@ -25,20 +26,20 @@ def load_data(model: str) -> Dict[str, str]:
 
 
 def generate_embeddings(
-    filename: str, chunks: List[str], params: Dict, chunk_method: str
+    filename: str, chunks: List[str], params: Dict, strategy: str
 ) -> Dict:
-    embedding = OpenAIEmbeddings(model="text-embedding-ada-002")
+    embedding = OpenAIEmbeddings(model="text-embedding-3-small")
 
     data = []
     for chunk in chunks:
         data.append(
             {
                 "filename": filename,
-                "chunk_content": chunk,
+                "strategy": strategy,
                 "strategy_params": params,
-                "chunk_method": chunk_method,
+                "chunk_content": chunk,
                 "chunk_size": len(chunk),
-                "chunk_embeddings": embedding.embed(chunk),
+                "chunk_embeddings": embedding.embed_query(chunk),
             }
         )
     return data
@@ -48,7 +49,7 @@ def character_text_splitter(
     text: str,
     filename: str,
     params: Optional[Dict] = None,
-    embeddings: Optional[bool] = False,
+    embeddings: Optional[bool] = True,
 ) -> Union[Dict, List[str]]:
     """Divide o texto em pedaços menores usando um separador de caracteres.
 
@@ -65,7 +66,15 @@ def character_text_splitter(
 
     splitter = CharacterTextSplitter(**data)
 
-    chunks = splitter.split_text(text)
+    logger = logging.getLogger("langchain_text_splitters.base")
+    original_level = logger.level
+
+    try:
+        logger.setLevel(logging.ERROR)
+
+        chunks = splitter.split_text(text)
+    finally:
+        logger.setLevel(original_level)
 
     if embeddings:
         return generate_embeddings(filename, chunks, data, "character_text_splitter")
@@ -107,7 +116,9 @@ def recursive_text_splitter(
         }
 
         for chunk in chunks:
-            next_chunks.extend(character_text_splitter(chunk, split_params)["chunks"])
+            next_chunks.extend(
+                character_text_splitter(chunk, split_params, embeddings=False)
+            )
 
         chunks = next_chunks
 
@@ -132,12 +143,14 @@ def recursive_character_text_splitter(
     """
     data = params or load_data("recursive_character_text_splitter")
 
-    # Converter length_function de string para função real
-    if isinstance(data, dict) and "length_function" in data:
-        if data["length_function"] == "len":
-            data["length_function"] = len
+    modify_data = data.copy()
 
-    splitter = RecursiveCharacterTextSplitter(**data)
+    # Converter length_function de string para função real
+    if isinstance(modify_data, dict) and "length_function" in modify_data:
+        if modify_data["length_function"] == "len":
+            modify_data["length_function"] = len
+
+    splitter = RecursiveCharacterTextSplitter(**modify_data)
 
     chunks = splitter.split_text(text)
 
@@ -166,9 +179,22 @@ def markdown_header_metadata_splitter(
 
     chunks = splitter.split_text(text)
 
-    return generate_embeddings(
-        filename, chunks, data, "markdown_header_metadata_splitter"
-    )
+    embedding = OpenAIEmbeddings(model="text-embedding-3-small")
+
+    embedded_chunks = []
+    for chunk in chunks:
+        embedded_chunks.append(
+            {
+                "filename": filename,
+                "strategy": "markdown_header_metadata_splitter",
+                "strategy_params": data,
+                "metadata": chunk.metadata,
+                "chunk_content": chunk.page_content,
+                "chunk_size": len(chunk.page_content),
+                "chunk_embeddings": embedding.embed_query(chunk.page_content),
+            }
+        )
+    return embedded_chunks
 
 
 def semantic_splitter(text: str, filename: str, params: Optional[Dict] = None) -> Dict:
@@ -186,7 +212,7 @@ def semantic_splitter(text: str, filename: str, params: Optional[Dict] = None) -
     data = params or load_data("semantic_splitter")
 
     embeddings = OpenAIEmbeddings(
-        model=data.get("embedding_model", "text-embedding-ada-002")
+        model=data.get("embedding_model", "text-embedding-3-small")
     )
 
     data_dict = {
