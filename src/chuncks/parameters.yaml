@@ -26,7 +26,7 @@ markdown_header_metadata_splitter:
   strip_headers: True
 
 semantic_splitter:
-  embeddings_model: "text-embedding-3-small"
+  embeddings: "text-embedding-3-small"
   buffer_size: 1
   breakpoint_threshold_type: "percentile"
   breakpoint_threshold_amount: 95
