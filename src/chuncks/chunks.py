@@ -2,11 +2,11 @@ from supabase import create_client
 
 from config import Config, logger
 from src.chuncks.text_splitters import (
-    character_text_splitter,
-    markdown_header_metadata_splitter,
-    recursive_character_text_splitter,
-    recursive_text_splitter,
-    semantic_splitter,
+    CharacterTextSplitters,
+    MarkdownHeaderMetadataSplitters,
+    RecursiveCharacterTextSplitters,
+    RecursiveTextSplitters,
+    SemanticSplitters,
 )
 
 
@@ -21,26 +21,30 @@ def get_best_method(filename: str) -> None:
         return
 
     splitters = [
-        character_text_splitter,
-        recursive_text_splitter,
-        recursive_character_text_splitter,
-        markdown_header_metadata_splitter,
-        semantic_splitter,
+        CharacterTextSplitters,
+        RecursiveTextSplitters,
+        RecursiveCharacterTextSplitters,
+        MarkdownHeaderMetadataSplitters,
+        SemanticSplitters,
     ]
 
     for splitter in splitters:
+        method = splitter()
+
         data = (
             supabase.table("chunks")
             .select("*")
-            .eq("strategy", splitter.__name__)
+            .eq("strategy", method.model_name)
             .eq("filename", filename)
             .execute()
         )
 
         if data.data:
-            logger.info(f"Chunks já existem para o método '{splitter.__name__}'")
+            logger.info(f"Chunks já existem para o método '{method.model_name}'")
         else:
-            logger.info(f"Criando chunks usando o método '{splitter.__name__}'")
-            text_chunks = splitter(response.data[0]["content"], filename=filename)
-            supabase.table("chunks").insert(text_chunks).execute()
+            logger.info(f"Criando chunks usando o método '{method.model_name}'")
+            method.split_text(response.data[0]["content"])
+            chunks = method.generate_embeddings(filename)
+
+            supabase.table("chunks").insert(chunks).execute()
             logger.info(f"Chunks criados")
