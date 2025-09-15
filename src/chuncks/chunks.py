@@ -10,7 +10,7 @@ from src.chuncks.text_splitters import (
 )
 
 
-def get_best_method(filename: str) -> None:
+def get_chunks(filename: str) -> None:
     supabase = create_client(Config.SUPABASE_URL, Config.SUPABASE_KEY)
     response = (
         supabase.table("documents").select("content").eq("filename", filename).execute()
