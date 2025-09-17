@@ -39,7 +39,7 @@ def extract_markdown(filename: str) -> None:
     )
 
     logger.info(f"Convertendo documento {filename}")
-    result = converter.convert(f"docs/{filename}.pdf")
+    result = converter.convert(f"docs/{filename}")
 
     markdown_content = result.document.export_to_markdown()
 
