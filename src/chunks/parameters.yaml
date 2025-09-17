@@ -7,6 +7,7 @@ character_text_splitter:
 recursive_text_splitter:
   chunk_size: 1000
   chunk_overlap: 100
+  keep_separator: False
   separators: ["\n\n", "\n", " ", ""]
 
 recursive_character_text_splitter:
@@ -26,7 +27,13 @@ markdown_header_metadata_splitter:
   strip_headers: True
 
 semantic_splitter:
-  embeddings: "text-embedding-3-small"
-  buffer_size: 1
-  breakpoint_threshold_type: "percentile"
-  breakpoint_threshold_amount: 95
+  recursive_params:
+    chunk_size: 100000
+    chunk_overlap: 1000
+    separators: ["\n\n", "\n", " ", ""]
+    keep_separator: False
+  semantic_params:
+    embeddings: "text-embedding-3-small"
+    buffer_size: 1
+    breakpoint_threshold_type: "percentile"
+    breakpoint_threshold_amount: 95
