@@ -1,0 +1,36 @@
+Questions:
+  question_1:
+    question: "Qual foi o valor da receita líquida para o trimestre 4T23?"
+    answer: "R$: 6.679,5 milhões"
+
+  question_2:
+    question: "Qual foi a receita líquida de geração para o trimestre 4T23?"
+    answer: "R$: 399,2 milhões"
+
+  question_3:
+    question: "Qual foi o valor da Ebitda para o trimestre 4T23?"
+    answer: "R$: 1.963,8 milhões"
+
+  question_4:
+    question: "Qual foi o valor da Ebitda ajustada para o trimestre 4T23?"
+    answer: "R$: 2.068,2 milhões"
+
+  question_5:
+    question: "Qual foi o valor da Ebitda de segmento de geração para o trimestre 4T23?"
+    answer: "R$: 10 milhões"
+
+  question_6:
+    question: "Qual foi o valor do lucro líquido para o trimestre 4T23?"
+    answer: "R$: 681,8 milhões"
+
+  question_7:
+    question: "Qual foi o valor da dívida total para o trimestre 4T23?"
+    answer: "R$: 24.874,2 milhões"
+
+  question_8:
+    question: "Qual foi o valor da dívida líquida para o trimestre 4T23?"
+    answer: "R$: 24.874,2 milhões"
+
+  question_9:
+    question: "Qual foi o valor da alavancagem financeira (dívida líquida/Ebitda ajustada) para o trimestre 4T23?"
+    answer: "3,1x"
