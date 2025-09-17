@@ -1,7 +1,7 @@
 from supabase import create_client
 
 from config import Config, logger
-from src.chuncks.text_splitters import (
+from src.chunks.text_splitters import (
     CharacterTextSplitters,
     MarkdownHeaderMetadataSplitters,
     RecursiveCharacterTextSplitters,
