@@ -1,36 +1,76 @@
 questions:
   question_1:
-    question: "Qual foi o valor da receita líquida para o trimestre 4T23?"
-    answer: "R$: 6.679,5 milhões"
+    question: Quais os prazos para execução de obras de responsabilidade da distribuidora quando do pedido de extensão de rede/conexão
+    answer: |
+      Para a execução de obras de responsabilidade da distribuidora, quando do pedido de extensão de rede/conexão, os prazos são os seguintes: 
+      1. **Elaboração e Fornecimento do Orçamento de Conexão:** A distribuidora deve elaborar e fornecer ao consumidor o orçamento de conexão, entregar os contratos e o documento ou meio para o pagamento, se houver participação financeira, no prazo de até 10 dias a partir da solicitação do orçamento de conexão.
+      2. **Devolução dos Contratos e Pagamento:** O consumidor tem até 5 dias para devolver à distribuidora os contratos e demais documentos assinados e, caso aplicável, pagar os custos de participação financeira de sua responsabilidade ou pactuar com a distribuidora como será realizado o pagamento.
+      3. **Realização das Obras de Conexão:** A distribuidora tem até 30 dias para realizar as obras de conexão, a vistoria e instalar os equipamentos de medição nas instalações do consumidor, desde que não haja necessidade de obras de ampliação, reforço ou melhoria no sistema de distribuição existente.
+      Esses prazos são aplicáveis às unidades consumidoras do Grupo A, sem microgeração ou minigeração distribuída, com potência contratada de até 140 kW, localizadas em área urbana e a uma distância de até 150 metros da rede de distribuição mais próxima.
+      Fundamentação: REN nº 1.000/2021: Art. 90, §§ 1º e 2º | Art. 89
 
   question_2:
-    question: "Qual foi a receita líquida de geração para o trimestre 4T23?"
-    answer: "R$: 399,2 milhões"
+    question: Quando a distribuidora pode realizar a cobrança do custo administrativo para cobrança de irregularidade?
+    answer: |
+      A distribuidora pode realizar a cobrança do custo administrativo para cobrança de irregularidade nos casos de recuperação da receita, conforme os seguintes critérios estabelecidos pela Resolução Normativa ANEEL nº 1.000/2021:
+      1. Quando o consumidor for responsável pela custódia dos equipamentos de medição da distribuidora, especialmente quando esses equipamentos estiverem instalados no interior do imóvel do consumidor.
+      2. Em situações onde houver ação comprovada que possa ser imputada ao consumidor.
+      3. Quando a responsabilidade pela irregularidade for comprovadamente atribuída ao consumidor.
+      Essas cobranças devem seguir os valores homologados pela ANEEL e serem devidamente discriminadas na fatura de energia elétrica, conforme as normas vigentes.
+      Fundamentação: REN nº 1.000/2021: Art. 597, Art. 634 §§ 1º e 2º
 
   question_3:
-    question: "Qual foi o valor da Ebitda para o trimestre 4T23?"
-    answer: "R$: 1.963,8 milhões"
+    question: A distribuidora pode exigir Termo de Compromisso e Responsabilidade para ressarcimento de danos solicitado em 19/7/2024, com ocorrência em 16/10/2023?
+    answer: |
+      A distribuidora não pode exigir um Termo de Compromisso e Responsabilidade para o ressarcimento de danos elétricos se a solicitação for feita dentro de 90 dias da data provável da ocorrência do dano. No caso apresentado, a solicitação de ressarcimento foi feita em 19/07/2024, para uma ocorrência em 16/10/2023, o que ultrapassa o prazo de 90 dias. Portanto, a distribuidora pode exigir os elementos indicados nos incisos VI e VII do caput do Art. 602 da REN nº 1.000/2021, que são dispensados apenas para solicitações feitas dentro do prazo de 90 dias.
+      Fundamentação: REN nº 1.000/2021: Art. 602, §§ 1º e 4º
 
   question_4:
-    question: "Qual foi o valor da Ebitda ajustada para o trimestre 4T23?"
-    answer: "R$: 2.068,2 milhões"
+    question: A distribuidora pode condicionar o débito do antigo titular para alterar a titularidade de uma unidade consumidora?
+    answer: |
+      A distribuidora não pode condicionar a alteração de titularidade de uma unidade consumidora ao pagamento de débitos do antigo titular. De acordo com a Resolução Normativa ANEEL nº 1.000/2021, a distribuidora está proibida de exigir ou condicionar a execução de serviços, como a alteração de titularidade, ao pagamento de débitos que não foram autorizados pelo novo consumidor ou que sejam de titularidade de terceiros. Além disso, a distribuidora não pode exigir que o novo titular assine qualquer termo assumindo a responsabilidade por débitos de terceiros.
+      Fundamentação: REN nº 1.000/2021: Art. 138, Art. 346, §§ 1º, 2º e 3º
 
   question_5:
-    question: "Qual foi o valor da Ebitda de segmento de geração para o trimestre 4T23?"
-    answer: "R$: 10 milhões"
+    question: Como é o processo da autoleitura?
+    answer: |
+      O processo de autoleitura é um mecanismo em que o consumidor realiza a leitura do medidor de energia elétrica, total ou parcialmente, e fornece essas informações à distribuidora. A distribuidora, mesmo optando pela autoleitura, continua responsável pela atividade de leitura. Para que a autoleitura seja realizada, é necessário que o consumidor concorde expressamente com o processo. A distribuidora deve orientar o consumidor sobre como realizar a autoleitura e oferecer pelo menos dois canais de comunicação para o envio das informações, sendo um deles obrigatoriamente o atendimento telefônico. Caso o consumidor não envie os dados ou a distribuidora recuse o uso das informações recebidas, a distribuidora ainda é obrigada a efetuar a leitura. A distribuidora deve registrar no sistema comercial os ciclos em que o faturamento foi realizado com base na autoleitura e informar na fatura quando o faturamento for feito por esse meio. Se o consumidor não enviar a autoleitura por dois ciclos consecutivos, a distribuidora deve realizar a leitura no ciclo subsequente.
+      Fundamentação REN nº 1.000/2021: Art. 263, Art. 265, Art. 266, Art. 267, Art. 268, Art. 270, Art. 273, Art. 276.
 
   question_6:
-    question: "Qual foi o valor do lucro líquido para o trimestre 4T23?"
-    answer: "R$: 681,8 milhões"
+    question: Qual o prazo de vencimento das faturas?
+    answer: |
+      O prazo para vencimento das faturas de energia elétrica, conforme a Resolução Normativa ANEEL nº 1.000/2021, deve ser contado a partir da data de apresentação da fatura. Para unidades consumidoras enquadradas nas classes poder público, iluminação pública e serviço público, o prazo mínimo é de 10 dias úteis. Nas demais situações, o prazo mínimo é de 5 dias úteis. Caso o vencimento ocorra em um sábado, domingo ou feriado, o pagamento pode ser realizado no primeiro dia útil subsequente.
+      Fundamentação: REN nº 1.000/2021: Art. 337, Art. 339 Parágrafo único
 
   question_7:
-    question: "Qual foi o valor da dívida total para o trimestre 4T23?"
-    answer: "R$: 24.874,2 milhões"
+    question: Qual artigo fala sobre erro de faturamento?
+    answer: |
+      O erro de faturamento é abordado na Resolução Normativa ANEEL Nº 1.000, de 7 de dezembro de 2021, especificamente nos artigos 323 e 324. Esses artigos tratam das disposições sobre o faturamento incorreto, incluindo as condições para devolução de valores pagos indevidamente e os procedimentos a serem seguidos pela distribuidora em caso de erro.
+      Art. 323 aborda a devolução de quantias recebidas indevidamente, que deve ser feita em dobro, com atualização monetária pelo IPCA e juros de mora, salvo algumas exceções. Art. 324 detalha os prazos para cobrança ou devolução e as condições em que o consumidor não tem direito à devolução de diferenças pagas a maior.
+      Fundamentação: REN nº 1.000/2021: Art. 323, §§ 1º, 2º, 3º, 4º, 5º, 6º, 7º, 8º, 9º, 10 | Art. 324, §§ 1º, 2º, 3º
 
   question_8:
-    question: "Qual foi o valor da dívida líquida para o trimestre 4T23?"
-    answer: "R$: 24.874,2 milhões"
+    question: Qual o prazo para restituição de pagamento em duplicidade?
+    answer: |
+      A devolução de pagamentos em duplicidade deve ser efetuada pela distribuidora, a critério do consumidor, por meio de crédito na conta corrente indicada, cheque nominal ou ordem de pagamento. O valor a ser devolvido deve ser atualizado pelo Índice Nacional de Preços ao Consumidor Amplo (IPCA) da data do pagamento até a data da devolução, desde que tenha transcorrido mais de um ciclo de faturamento desde a constatação do pagamento em duplicidade. Caso o valor a compensar seja maior que o valor da fatura, o crédito restante deve ser compensado nos ciclos de faturamento subsequentes.
+      Fundamentação REN 1000/2021: Art. 342, §§ 2º, 3º e 4º
 
   question_9:
-    question: "Qual foi o valor da alavancagem financeira (dívida líquida/Ebitda ajustada) para o trimestre 4T23?"
-    answer: "3,1x"
+    question: Quais consumidores tem direito à tarifa social?
+    answer: |
+      Para ter direito à Tarifa Social de Energia Elétrica, os consumidores devem atender a critérios específicos estabelecidos pela ANEEL. De acordo com a Resolução Normativa ANEEL nº 1.000/2021, os consumidores que podem se beneficiar da Tarifa Social são aqueles que se enquadram nas subclasses residencial baixa renda, incluindo famílias indígenas e quilombolas, desde que atendam aos seguintes requisitos:
+      1. Estar inscrito no Cadastro Único para Programas Sociais do Governo Federal (CadÚnico) com renda familiar mensal per capita de até meio salário mínimo nacional; ou
+      2. Estar recebendo o Benefício de Prestação Continuada da Assistência Social (BPC); e
+      3. A condição de indígena ou quilombola deve estar cadastrada no CadÚnico ou no benefício de prestação continuada.
+      Além disso, cada família tem direito ao benefício da tarifa social em apenas uma unidade consumidora. A distribuidora deve aplicar o benefício de acordo com critérios de priorização, caso haja duplicidade no pedido ou no recebimento, como a utilização pelo responsável pela unidade familiar ou o endereço da unidade consumidora ser o mesmo do CadÚnico ou do BPC.
+      Fundamentação: REN nº 1.000/2021: Art. 176, §§ 1º, 2º, 3º, 4º e 5º | Art. 200, § 3º"
+
+  question_10:
+    question: O que é DIC, FIC e Dmic?
+    answer: |
+      DIC, FIC e DMIC são indicadores de continuidade do serviço de energia elétrica, utilizados para medir a qualidade do fornecimento de energia pelas distribuidoras. Esses indicadores são definidos pela Agência Nacional de Energia Elétrica (ANEEL) e são fundamentais para garantir que as distribuidoras mantenham um padrão adequado de serviço. Aqui está uma breve descrição de cada um:
+      1. **DIC (Duração de Interrupção por Unidade Consumidora):** Mede o tempo total, em horas, que uma unidade consumidora fica sem energia elétrica durante um período de apuração, geralmente um mês ou um ano. É um indicador de quanto tempo, em média, os consumidores ficam sem energia.
+      2. **FIC (Frequência de Interrupção por Unidade Consumidora):** Mede o número de vezes que uma unidade consumidora experimenta interrupções no fornecimento de energia durante um período de apuração. Este indicador mostra a frequência com que ocorrem as interrupções.
+      3. **DMIC (Duração Máxima de Interrupção Contínua):** Refere-se ao tempo máximo que uma interrupção pode durar sem que a distribuidora sofra penalidades. É um indicador que busca limitar a duração de interrupções individuais, garantindo que as falhas sejam corrigidas em um tempo razoável.
+      Esses indicadores são utilizados para avaliar o desempenho das distribuidoras de energia elétrica e garantir que os consumidores recebam um serviço de qualidade. As distribuidoras devem cumprir metas estabelecidas pela ANEEL para cada um desses indicadores, e o não cumprimento pode resultar em penalidades."
