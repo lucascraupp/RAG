@@ -4,12 +4,6 @@ character_text_splitter:
   separator: "\n\n"
   keep_separator: False
 
-recursive_text_splitter:
-  chunk_size: 1000
-  chunk_overlap: 100
-  keep_separator: False
-  separators: ["\n\n", "\n", " ", ""]
-
 recursive_character_text_splitter:
   chunk_size: 1000
   chunk_overlap: 100
