@@ -4,7 +4,10 @@ from typing import Dict, List, Optional
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_openai import OpenAIEmbeddings
 
-from src.chunks.splitters import RecursiveCharacterTextSplitter, TextSplitter
+from src.chunks.splitters.recursive_character_text_splitter import (
+    CustomRecursiveCharacterTextSplitter as RecursiveCharacterTextSplitter,
+)
+from src.chunks.splitters.text_splitter import TextSplitter
 
 
 class SemanticSplitter(TextSplitter):
