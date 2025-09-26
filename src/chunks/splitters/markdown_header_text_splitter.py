@@ -3,7 +3,7 @@ from typing import Dict, Optional
 import pandas as pd
 from langchain_text_splitters import MarkdownHeaderTextSplitter
 
-from src.chunks.splitters import TextSplitter
+from src.chunks.splitters.text_splitter import TextSplitter
 
 
 class CustomMarkdownHeaderTextSplitter(TextSplitter):
