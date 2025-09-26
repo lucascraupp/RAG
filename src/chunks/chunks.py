@@ -43,8 +43,8 @@ def get_chunks(filename: str) -> None:
             logger.info(f"Chunks já existem para o método '{method.model_name}'")
         else:
             logger.info(f"Criando chunks usando o método '{method.model_name}'")
-            method.split_text(response.data[0]["content"])
-            chunks = method.generate_embeddings(filename)
+            method.split_text(response.data[0]["content"], filename)
+            chunks = method.generate_embeddings()
 
             supabase.table("chunks").insert(chunks).execute()
             logger.info(f"Chunks criados")
