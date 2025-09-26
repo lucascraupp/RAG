@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 
 from langchain_text_splitters import CharacterTextSplitter
 
-from src.chunks.splitters import TextSplitter
+from src.chunks.splitters.text_splitter import TextSplitter
 
 
 class CustomCharacterTextSplitter(TextSplitter):
